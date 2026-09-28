@@ -38,7 +38,9 @@ h3 { font-size: 1.1rem; margin: 0 0 10px; }
 .hero { padding: 68px 0 30px; text-align: center; }
 .hero h1 { margin: 0 auto 30px; max-width: 980px; font-size: clamp(1.7rem, 3vw, 2.3rem); font-weight: 600; line-height: 1.34; letter-spacing: -.035em; }
 .project-name { display: block; font-size: clamp(3rem, 5.4vw, 4.25rem); color: var(--accent); font-weight: 650; letter-spacing: -.055em; margin-bottom: 16px; }
-.authors { max-width: 1000px; margin: 0 auto 20px; font-size: 16px; line-height: 2.05; }
+.authors { max-width: 1000px; margin: 0 auto 12px; font-size: 16px; line-height: 2.05; }
+.author-notes { margin: 0 auto 20px; color: var(--muted); font-size: 12px; }
+.author-notes span { white-space: nowrap; }
 .author { display: inline-block; white-space: nowrap; margin: 0 6px; }
 .author a { color: #3c5b61; }
 .author a:hover { color: var(--accent); }
@@ -181,7 +183,7 @@ details .figure { margin-top: 24px; }
   .hero { padding: 38px 0 22px; }
   .hero h1 { font-size: 1.65rem; margin-bottom: 24px; }
   .project-name { font-size: 3.15rem; margin-bottom: 12px; }
-  .authors { font-size: 14px; line-height: 2; margin-bottom: 16px; }
+  .authors { font-size: 14px; line-height: 2; margin-bottom: 12px; }
   .author { margin: 0 4px; }
   .affiliations { font-size: 11px; line-height: 1.95; }
   .affiliation { margin: 0 5px; }
