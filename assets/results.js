@@ -12,6 +12,7 @@ window.ENGIWORLD_RESULTS = [
     "gui": 40.5,
     "overall": 44.3,
     "steps": 70.2,
+    "tokens_k": 2.4,
     "cost": 19.02
   },
   {
@@ -27,6 +28,7 @@ window.ENGIWORLD_RESULTS = [
     "gui": 28.6,
     "overall": 38.0,
     "steps": 54.9,
+    "tokens_k": 1.0,
     "cost": 9.73
   },
   {
@@ -42,6 +44,7 @@ window.ENGIWORLD_RESULTS = [
     "gui": 16.6,
     "overall": 25.8,
     "steps": 108.1,
+    "tokens_k": 2.6,
     "cost": 6.52
   },
   {
@@ -57,6 +60,7 @@ window.ENGIWORLD_RESULTS = [
     "gui": 2.0,
     "overall": 25.5,
     "steps": 116.2,
+    "tokens_k": 9.9,
     "cost": 0.81
   },
   {
@@ -72,6 +76,7 @@ window.ENGIWORLD_RESULTS = [
     "gui": 14.2,
     "overall": 25.3,
     "steps": 110.8,
+    "tokens_k": 0.7,
     "cost": 2.11
   },
   {
@@ -87,6 +92,7 @@ window.ENGIWORLD_RESULTS = [
     "gui": 16.7,
     "overall": 24.1,
     "steps": 92.5,
+    "tokens_k": 0.9,
     "cost": 5.9
   },
   {
@@ -102,6 +108,7 @@ window.ENGIWORLD_RESULTS = [
     "gui": 1.0,
     "overall": 16.1,
     "steps": 120.5,
+    "tokens_k": 1.3,
     "cost": 0.45
   }
 ];

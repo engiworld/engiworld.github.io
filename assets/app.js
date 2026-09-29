@@ -3,7 +3,7 @@
   const results = window.ENGIWORLD_RESULTS;
   const table = document.querySelector('#results-table');
   const columns = {
-    overall: [['overall', 'EngiScore'], ['cli', 'CLI · 152'], ['gui', 'GUI · 148'], ['steps', 'Steps'], ['cost', 'Cost ($)']],
+    overall: [['overall', 'EngiScore'], ['cli', 'CLI · 152'], ['gui', 'GUI · 148'], ['steps', 'Steps'], ['tokens_k', 'Tokens (K)'], ['cost', 'Cost ($)']],
     category: [['overall', 'EngiScore'], ['single', 'Single · 175'], ['multi', 'Multi · 24'], ['selection', 'Select. · 28'], ['quantitative', 'Quant. · 33'], ['image', 'Image · 36'], ['open', 'Open · 4']]
   };
   let currentView = 'overall', sortKey = 'overall', ascending = false;
@@ -19,7 +19,7 @@
   table.addEventListener('click', event => {
     const button = event.target.closest('[data-sort]');
     if (!button) return;
-    ascending = button.dataset.sort === sortKey ? !ascending : ['steps','cost'].includes(button.dataset.sort);
+    ascending = button.dataset.sort === sortKey ? !ascending : ['steps','tokens_k','cost'].includes(button.dataset.sort);
     sortKey = button.dataset.sort;
     renderResults();
     table.querySelector(`[data-sort="${sortKey}"]`).focus({preventScroll:true});
