@@ -20,9 +20,9 @@ The 70-second GUI showcase of 88 distinct successful tasks appears after the aut
 
 ## Content
 
-The page includes the user-supplied list of 22 authors and 11 affiliations, manuscript figures, task descriptions, model results, ablations, case studies, and a manuscript citation. Author names link to verified Google Scholar profiles or GitHub accounts where available; unverified entries link back to the project homepage. Eight authors are displayed without profile links.
+The page includes the user-supplied list of 22 authors and 11 affiliations, manuscript figures, task descriptions, model results, ablations, case studies, and an arXiv citation. Author names link to verified Google Scholar profiles or GitHub accounts where available; unverified entries link back to the project homepage. Eight authors are displayed without profile links.
 
-Paper: https://openreview.net/forum?id=4kPwNYWJYm
+Paper: https://arxiv.org/abs/2609.37686
 
 Code and Dataset links remain marked **Coming soon** until their official release destinations are supplied. This repository contains the project website; it does not contain the benchmark implementation or the complete task dataset.
 
