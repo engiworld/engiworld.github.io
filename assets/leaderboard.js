@@ -51,6 +51,7 @@
   function describeModel(name) {
     const row = results.find(model => model.name === name);
     if (!row) return;
+    detail.hidden = false;
     detail.innerHTML = `<strong>${escape(row.name)}</strong> · ${subsets[yKey]} EngiScore <strong>${row[yKey].toFixed(1)}</strong> · ${metrics[xKey].format(row[xKey])} ${metrics[xKey].short}`;
   }
 
@@ -96,7 +97,7 @@
       point.addEventListener('focus', () => describeModel(point.dataset.point));
     });
     if (selected) describeModel(selected);
-    else detail.textContent = 'Select a model to highlight it and see its exact values.';
+    else { detail.textContent = ''; detail.hidden = true; }
   }
 
   xButtons.forEach(button => button.addEventListener('click', () => {

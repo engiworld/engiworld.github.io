@@ -6,15 +6,22 @@
     overall: [['overall', 'EngiScore'], ['cli', 'CLI · 152'], ['gui', 'GUI · 148'], ['steps', 'Steps'], ['tokens_k', 'Tokens (K)'], ['cost', 'Cost ($)']],
     category: [['overall', 'EngiScore'], ['single', 'Single · 175'], ['multi', 'Multi · 24'], ['selection', 'Select. · 28'], ['quantitative', 'Quant. · 33'], ['image', 'Image · 36'], ['open', 'Open · 4']]
   };
+  const descriptions = {
+    overall: 'EngiScore = 100 × mean task score. Binary tasks require every criterion to pass; quantitative tasks score 0–1 after feasibility checks. Infeasible outputs score 0.',
+    cli: 'CLI EngiScore over 152 tasks; CLI and GUI use different task subsets.',
+    gui: 'GUI EngiScore over 148 tasks; CLI and GUI use different task subsets.',
+    steps: 'Mean steps per task over all 300 tasks, including unsuccessful runs.',
+    tokens_k: 'Mean output tokens per decision step, in thousands, averaged over all 300 tasks.',
+    cost: 'Mean API cost in US dollars per task over all 300 tasks, including unsuccessful runs.',
+    single: 'Single-software · 175 tasks', multi: 'Multi-software · 24 tasks', selection: 'Software-selection · 28 tasks',
+    quantitative: 'Quantitative design · 33 tasks', image: 'Image-based modeling · 36 tasks', open: 'Open-ended · 4 tasks'
+  };
   let currentView = 'overall', sortKey = 'overall', ascending = false;
   function renderResults() {
     const data = [...results].sort((a, b) => (a[sortKey] - b[sortKey]) * (ascending ? 1 : -1) || b.overall - a.overall);
     const cols = columns[currentView];
-    table.querySelector('thead tr').innerHTML = '<th scope="col">Model</th>' + cols.map(([key,label]) => `<th scope="col"${key === sortKey ? ` aria-sort="${ascending ? 'ascending' : 'descending'}"` : ''}><button type="button" data-sort="${key}" aria-label="Sort by ${label}">${label}<span class="sort-arrow" aria-hidden="true">${key === sortKey ? (ascending ? '↑' : '↓') : '↕'}</span></button></th>`).join('');
+    table.querySelector('thead tr').innerHTML = '<th scope="col">Model</th>' + cols.map(([key,label]) => `<th scope="col"${key === sortKey ? ` aria-sort="${ascending ? 'ascending' : 'descending'}"` : ''}><button type="button" data-sort="${key}" title="${descriptions[key]}" aria-label="Sort by ${label}">${label}<span class="sort-arrow" aria-hidden="true">${key === sortKey ? (ascending ? '↑' : '↓') : '↕'}</span></button></th>`).join('');
     table.querySelector('tbody').innerHTML = data.map((row, index) => `<tr><td><span class="model-cell"><span class="rank">${String(index+1).padStart(2,'0')}</span><img src="assets/logos/${row.logo}.webp" alt="" width="22" height="22">${row.name}</span></td>${cols.map(([key]) => `<td${key === 'overall' ? ' class="score-cell"' : ''}>${key === 'overall' ? `<span class="scorebar" aria-hidden="true"><i style="width:${row[key]}%"></i></span>` : ''}${row[key].toFixed(key === 'cost' ? 2 : 1)}</td>`).join('')}</tr>`).join('');
-    document.querySelector('#subset-note').textContent = currentView === 'overall'
-      ? 'CLI and GUI scores are measured on different task subsets, not a paired comparison of the same tasks. Scores are reported as in the supplied manuscript.'
-      : 'Column labels include evaluation task counts (300 total). Single: single-software; Multi: multi-software; Select.: software-selection; Quant.: quantitative design; Image: image-based modeling; Open: open-ended. Open-ended results use only 4 tasks.';
   }
   table.addEventListener('click', event => {
     const button = event.target.closest('[data-sort]');
@@ -48,7 +55,6 @@
     document.querySelector('#figure-dialog-image').src = button.dataset.figure;
     document.querySelector('#figure-dialog-image').alt = image.alt;
     document.querySelector('#figure-dialog-title').textContent = image.alt;
-    document.querySelector('#figure-dialog-pdf').href = button.dataset.pdf;
     dialog.showModal();
     document.body.style.overflow = 'hidden';
   }));

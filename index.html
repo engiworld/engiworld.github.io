@@ -10,10 +10,10 @@
   <meta property="og:description" content="1,301 expert-curated tasks across 26 professional software platforms. A benchmark for the complete engineering design loop.">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23087d77'/%3E%3Cpath d='M18 17h29v7H26v5h17v7H26v5h21v7H18z' fill='white'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="assets/style.css?v=leaderboard-20261007">
+  <link rel="stylesheet" href="assets/style.css?v=figures-20261007">
   <script src="assets/results.js?v=tokens-20260929" defer></script>
-  <script src="assets/app.js?v=tokens-20260929" defer></script>
-  <script src="assets/leaderboard.js?v=leaderboard-20261007" defer></script>
+  <script src="assets/app.js?v=figures-20261007" defer></script>
+  <script src="assets/leaderboard.js?v=figures-20261007" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -35,21 +35,13 @@
     <a class="resource" href="#citation"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h6v7H4zm10 0h6v7h-6zM10 14c0 3-2 5-5 5m15-5c0 3-2 5-5 5"/></svg>BibTeX</a>
   </div>
 </div></section>
-<div class="container"><div class="stats" aria-label="Benchmark at a glance">
-  <div class="stat"><strong>1,301</strong><span>Expert-curated tasks</span></div>
-  <div class="stat"><strong>26</strong><span>Software platforms</span></div>
-  <div class="stat"><strong>6</strong><span>Engineering domains</span></div>
-  <div class="stat"><strong>6</strong><span>Task types</span></div>
-  <div class="stat"><strong>7</strong><span>Evaluated models</span></div>
-</div></div>
-
 <div class="container showcase-container">
   <figure class="hero-showcase" aria-label="EngiWorld GUI task showcase">
     <video id="hero-video" controls autoplay muted loop playsinline preload="metadata" width="1920" height="1080" poster="assets/videos/EngiWorld_88Tasks_70s_v4.jpg" aria-describedby="showcase-caption">
       <source src="assets/videos/EngiWorld_88Tasks_70s_v4.mp4" type="video/mp4">
       <a href="assets/videos/EngiWorld_88Tasks_70s_v4.mp4">Watch the EngiWorld showcase</a>
     </video>
-    <figcaption id="showcase-caption">From one task to a world of engineering. 88 successful GUI tasks, edited from real experiment recordings and screenshots.</figcaption>
+    <figcaption id="showcase-caption" class="sr-only">88 successful GUI tasks from real experiment trajectories.</figcaption>
   </figure>
 </div>
 
@@ -60,49 +52,47 @@
     <p>We present <strong>EngiWorld</strong>, the first benchmark structured around the complete design loop: <strong>1,301 expert-curated tasks</strong> spanning 6 engineering domains (CAD, CAE, CAM, BIM, EDA, and 3D visualization) and 26 professional software platforms, with both GUI and CLI interfaces and 6 task types ranging from software-selection to open-ended tasks.</p>
     <p>We further introduce an <strong>artifact-centric evaluation methodology</strong> built on a unified domain-verifier suite, which programmatically checks the geometric validity, physical feasibility, and rule compliance of final and intermediate artifacts, and scores quantitative design tasks continuously by specification attainment rather than binary success. Evaluation of seven frontier models reveals a substantial capability gap: the strongest model achieves an EngiScore of only <strong>44.3</strong>, and just <strong>3.6% of multi-software attempts</strong> succeed. EngiWorld provides the first rigorous foundation for measuring progress toward agents that operate professional engineering software end to end.</p>
   </div>
-  <figure class="figure">
-    <button class="figure-button" type="button" data-figure="assets/figures/benchmark_overview.webp" data-pdf="assets/figures/benchmark_overview.pdf" aria-label="Enlarge: Engineering task examples and six-domain software coverage">
+  <figure class="figure" style="--figure-width:1000px">
+    <button class="figure-button" type="button" data-figure="assets/figures/benchmark_overview.webp" aria-label="Enlarge: Engineering task examples and six-domain software coverage">
       <img src="assets/figures/benchmark_overview.webp" alt="Engineering task examples and six-domain software coverage" width="2200" height="1243" loading="eager" decoding="async">
-    </button><figcaption><strong>EngiWorld at a glance.</strong> Representative multi-software and software-selection tasks, with software coverage across CAD, CAE, EDA, BIM, CAM, and 3D visualization. <a href="assets/figures/benchmark_overview.pdf" target="_blank" rel="noopener">View PDF ↗</a></figcaption>
+    </button>
     </figure>
 </div></section>
 
 <section class="section" id="benchmark"><div class="container">
   <div class="section-heading"><h2>The benchmark</h2><p>Six task types, spanning the complete engineering design loop.</p></div>
-  <div class="task-grid"><article class="task-card" style="--task-color:#a07551"><div class="task-top"><span class="task-label">Intent grounding</span><span class="task-count">120</span></div><h3>Image-based modeling</h3><p>Construct engineering artifacts from visual references and drawings.</p></article><article class="task-card" style="--task-color:#62804c"><div class="task-top"><span class="task-label">Tool selection</span><span class="task-count">140</span></div><h3>Software-selection</h3><p>Choose suitable applications from a permitted set of engineering tools.</p></article><article class="task-card" style="--task-color:#347db1"><div class="task-top"><span class="task-label">Precise construction</span><span class="task-count">931</span></div><h3>Single-software</h3><p>Complete a specified engineering objective within one designated application.</p></article><article class="task-card" style="--task-color:#8160a1"><div class="task-top"><span class="task-label">Specification attainment</span><span class="task-count">40</span></div><h3>Quantitative design</h3><p>Meet feasibility constraints and optimize a continuous design-quality objective.</p></article><article class="task-card" style="--task-color:#158a87"><div class="task-top"><span class="task-label">Cross-toolchain delivery</span><span class="task-count">60</span></div><h3>Multi-software</h3><p>Transfer intermediate artifacts and preserve dependencies across applications.</p></article><article class="task-card" style="--task-color:#b07649"><div class="task-top"><span class="task-label">Environment bootstrapping</span><span class="task-count">10</span></div><h3>Open-ended</h3><p>Choose tools and execution strategies without a predefined software workflow.</p></article></div>
-  <div class="interface-note"><span><strong>691</strong> CLI tasks</span><span><strong>610</strong> GUI tasks</span><span><strong>Windows + Ubuntu</strong> environments</span></div>
-  <div class="figure-grid">
-    <figure class="figure">
-    <button class="figure-button" type="button" data-figure="assets/figures/software_coverage.webp" data-pdf="assets/figures/software_coverage.pdf" aria-label="Enlarge: Software coverage across six engineering domains">
+  <div class="task-grid"><article class="task-card"><div class="task-top"><h3>Image-based modeling</h3><span class="task-count">120</span></div><p>Construct engineering artifacts from visual references and drawings.</p></article><article class="task-card"><div class="task-top"><h3>Software-selection</h3><span class="task-count">140</span></div><p>Choose suitable applications from a permitted set of engineering tools.</p></article><article class="task-card"><div class="task-top"><h3>Single-software</h3><span class="task-count">931</span></div><p>Complete a specified engineering objective within one designated application.</p></article><article class="task-card"><div class="task-top"><h3>Quantitative design</h3><span class="task-count">40</span></div><p>Meet feasibility constraints and optimize a continuous design-quality objective.</p></article><article class="task-card"><div class="task-top"><h3>Multi-software</h3><span class="task-count">60</span></div><p>Transfer intermediate artifacts and preserve dependencies across applications.</p></article><article class="task-card"><div class="task-top"><h3>Open-ended</h3><span class="task-count">10</span></div><p>Choose tools and execution strategies without a predefined software workflow.</p></article></div>
+  <div class="figure-grid benchmark-figures">
+    <figure class="figure" style="--figure-width:540px">
+    <button class="figure-button" type="button" data-figure="assets/figures/software_coverage.webp" aria-label="Enlarge: Software coverage across six engineering domains" aria-describedby="software_coverage-caption">
       <img src="assets/figures/software_coverage.webp" alt="Software coverage across six engineering domains" width="2200" height="1609" loading="lazy" decoding="async">
-    </button><figcaption><strong>Software coverage.</strong> 1,723 task–software associations, including every participating application and permitted candidate tool. <a href="assets/figures/software_coverage.pdf" target="_blank" rel="noopener">View PDF ↗</a></figcaption>
+    </button><figcaption id="software_coverage-caption" class="sr-only">1,723 task–software associations.</figcaption>
     </figure>
-    <figure class="figure">
-    <button class="figure-button" type="button" data-figure="assets/figures/task_types_and_interfaces.webp" data-pdf="assets/figures/task_types_and_interfaces.pdf" aria-label="Enlarge: Task counts by task type and GUI or CLI interface">
+    <figure class="figure" style="--figure-width:400px">
+    <button class="figure-button" type="button" data-figure="assets/figures/task_types_and_interfaces.webp" aria-label="Enlarge: Task counts by task type and GUI or CLI interface">
       <img src="assets/figures/task_types_and_interfaces.webp" alt="Task counts by task type and GUI or CLI interface" width="1783" height="2200" loading="lazy" decoding="async">
-    </button><figcaption><strong>Dataset composition.</strong> Six disjoint task types totaling 1,301 tasks, divided into 691 CLI and 610 GUI tasks. <a href="assets/figures/task_types_and_interfaces.pdf" target="_blank" rel="noopener">View PDF ↗</a></figcaption>
+    </button>
     </figure>
   </div>
-  <details><summary>How the dataset is constructed</summary><p style="margin-top:16px">Experts define representative engineering objectives, initial workspaces, deliverables, and acceptance criteria. AI assists task specification and verifier implementation. The final task packages are executed and reviewed in their designated software environments.</p><figure class="figure">
-    <button class="figure-button" type="button" data-figure="assets/figures/dataset_construction_web.webp" data-pdf="assets/figures/dataset_construction_web.pdf" aria-label="Enlarge: Expert-led dataset construction and validation pipeline">
+  <details open><summary>How the dataset is constructed</summary><p style="margin-top:16px">Experts define tasks and acceptance criteria; AI assists specification and verifier implementation. Each task is executed and reviewed in its software environment.</p><figure class="figure" style="--figure-width:960px">
+    <button class="figure-button" type="button" data-figure="assets/figures/dataset_construction_web.webp" aria-label="Enlarge: Expert-led dataset construction and validation pipeline">
       <img src="assets/figures/dataset_construction_web.webp" alt="Expert-led dataset construction and validation pipeline" width="2600" height="1140" loading="lazy" decoding="async">
-    </button><figcaption><strong>Expert-led, AI-assisted construction.</strong> Task specification, task-instance preparation, and evaluation-criteria construction. <a href="assets/figures/dataset_construction_web.pdf" target="_blank" rel="noopener">View PDF ↗</a></figcaption>
+    </button>
     </figure></details>
 </div></section>
 
 <section class="section" id="evaluation"><div class="container">
   <div class="section-heading"><h2>Evaluation</h2><p>Agents work through GUI or CLI interfaces. Domain-specific verifiers reopen their deliverables and check the engineering properties that matter.</p></div>
-  <figure class="figure">
-    <button class="figure-button" type="button" data-figure="assets/figures/engiworld_framework.webp" data-pdf="assets/figures/engiworld_framework.pdf" aria-label="Enlarge: EngiWorld interaction and artifact-centric evaluation framework">
+  <figure class="figure" style="--figure-width:960px">
+    <button class="figure-button" type="button" data-figure="assets/figures/engiworld_framework.webp" aria-label="Enlarge: EngiWorld interaction and artifact-centric evaluation framework">
       <img src="assets/figures/engiworld_framework.webp" alt="EngiWorld interaction and artifact-centric evaluation framework" width="2200" height="1059" loading="lazy" decoding="async">
-    </button><figcaption><strong>Unified interaction and verification.</strong> GUI and CLI agents share the same artifact-based evaluation protocol. <a href="assets/figures/engiworld_framework.pdf" target="_blank" rel="noopener">View PDF ↗</a></figcaption>
+    </button>
     </figure>
   <div class="verification">
     <article><h3>Interact</h3><p>Start from a clean, task-specific workspace. Use visual observations and mouse or keyboard actions, or terminal commands and scripts.</p></article>
     <article><h3>Deliver</h3><p>Submit native models, simulation outputs, circuits, building models, or 3D scenes, including intermediate files when the workflow requires them.</p></article>
     <article><h3>Verify</h3><p>Recompute geometry, topology, physical quantities, rule compliance, and consistency across workflow stages against task-specific criteria.</p></article>
   </div>
-  <div class="metric-note"><p><strong>EngiScore = 100 × mean task score.</strong> Binary tasks receive 1 only when every required criterion passes. Quantitative design tasks receive a continuous score between 0 and 1 after passing feasibility checks; infeasible outputs receive 0.</p></div>
 </div></section>
 
 <section class="section" id="results"><div class="container">
@@ -119,18 +109,17 @@
         <button type="button" data-chart-y="cli" aria-pressed="false">CLI</button>
         <button type="button" data-chart-y="gui" aria-pressed="false">GUI</button>
       </div></fieldset>
-      <span class="evaluation-badge">Main evaluation · 300 tasks</span>
     </div>
     <div class="chart-surface"><div class="chart-scroll" tabindex="0" aria-label="Scrollable model comparison chart">
-      <svg id="efficiency-chart" viewBox="0 0 1160 480" width="1160" height="480" role="img" aria-labelledby="efficiency-title efficiency-description">
+      <svg id="efficiency-chart" viewBox="0 0 1160 480" width="1160" height="480" role="img" aria-labelledby="efficiency-title efficiency-description" aria-describedby="chart-caption">
         <title id="efficiency-title">EngiWorld model performance and resource use</title>
         <desc id="efficiency-description">Mean steps per task against overall EngiScore. Exact values are available in the results table below.</desc>
       </svg>
     </div>
     <div class="chart-legend" role="group" aria-label="Highlight a model"><button type="button" data-chart-model="Claude Opus 5" aria-pressed="false"><span class="legend-dot" style="--model-color:#16816b"></span>Claude Opus 5</button><button type="button" data-chart-model="GPT-5.6 Sol" aria-pressed="false"><span class="legend-dot" style="--model-color:#30363f"></span>GPT-5.6 Sol</button><button type="button" data-chart-model="Qwen3.8 Max" aria-pressed="false"><span class="legend-dot" style="--model-color:#7855ba"></span>Qwen3.8 Max</button><button type="button" data-chart-model="DeepSeek V4.1 Flash" aria-pressed="false"><span class="legend-dot" style="--model-color:#397bbd"></span>DeepSeek V4.1 Flash</button><button type="button" data-chart-model="Gemini 3.7 Flash" aria-pressed="false"><span class="legend-dot" style="--model-color:#bd7b1f"></span>Gemini 3.7 Flash</button><button type="button" data-chart-model="Kimi K3" aria-pressed="false"><span class="legend-dot" style="--model-color:#c95180"></span>Kimi K3</button><button type="button" data-chart-model="Qwen3.8 Flash" aria-pressed="false"><span class="legend-dot" style="--model-color:#aa89cc"></span>Qwen3.8 Flash</button></div>
-    <output class="chart-detail" id="chart-detail" aria-live="polite">Select a model to see its exact values.</output>
+    <output class="chart-detail" id="chart-detail" aria-live="polite" hidden></output>
     </div>
-    <p class="chart-caption" id="chart-caption">Each point is one model. Steps and cost are per-task means; output tokens are per-step means. Lower resource use and higher EngiScore are better.</p>
+    <p class="sr-only" id="chart-caption">Each point is one model. Steps and cost are per-task means; output tokens are per-step means.</p>
     <noscript><p>The interactive chart requires JavaScript. All seven models and their exact results are available in the table below.</p></noscript>
   </div>
   <div class="results-toolbar">
@@ -138,7 +127,7 @@
     <a class="download" href="assets/main_results.csv?v=tokens-20260929" download><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg>Download results</a>
   </div>
   <div id="results-panel" role="tabpanel" aria-labelledby="tab-overall" tabindex="0">
-    <div class="table-scroll"><table id="results-table"><caption class="sr-only">EngiWorld main evaluation. Click column headings to sort.</caption><thead><tr><th scope="col">Model</th><th scope="col" aria-sort="descending"><button type="button" data-sort="overall" aria-label="Sort by EngiScore">EngiScore <span class="sort-arrow" aria-hidden="true">↓</span></button></th><th scope="col"><button type="button" data-sort="cli" aria-label="Sort by CLI · 152">CLI · 152 <span class="sort-arrow" aria-hidden="true">↕</span></button></th><th scope="col"><button type="button" data-sort="gui" aria-label="Sort by GUI · 148">GUI · 148 <span class="sort-arrow" aria-hidden="true">↕</span></button></th><th scope="col"><button type="button" data-sort="steps" aria-label="Sort by Steps">Steps <span class="sort-arrow" aria-hidden="true">↕</span></button></th><th scope="col"><button type="button" data-sort="tokens_k" aria-label="Sort by Tokens (K)">Tokens (K) <span class="sort-arrow" aria-hidden="true">↕</span></button></th><th scope="col"><button type="button" data-sort="cost" aria-label="Sort by Cost ($)">Cost ($) <span class="sort-arrow" aria-hidden="true">↕</span></button></th></tr></thead><tbody><tr><td><span class="model-cell"><span class="rank">01</span><img src="assets/logos/claude.webp" alt="" width="22" height="22">Claude Opus 5</span></td><td class="score-cell"><span class="scorebar" aria-hidden="true"><i style="width:44.3%"></i></span>44.3</td><td>47.9</td><td>40.5</td><td>70.2</td><td>2.4</td><td>19.02</td></tr>
+    <div class="table-scroll"><table id="results-table"><caption class="sr-only">EngiWorld main evaluation. Click column headings to sort.</caption><thead><tr><th scope="col">Model</th><th scope="col" aria-sort="descending"><button type="button" data-sort="overall" title="EngiScore = 100 × mean task score. Binary tasks require every criterion to pass; quantitative tasks score 0–1 after feasibility checks. Infeasible outputs score 0." aria-label="Sort by EngiScore">EngiScore <span class="sort-arrow" aria-hidden="true">↓</span></button></th><th scope="col"><button type="button" data-sort="cli" title="CLI EngiScore over 152 tasks; CLI and GUI use different task subsets." aria-label="Sort by CLI · 152">CLI · 152 <span class="sort-arrow" aria-hidden="true">↕</span></button></th><th scope="col"><button type="button" data-sort="gui" title="GUI EngiScore over 148 tasks; CLI and GUI use different task subsets." aria-label="Sort by GUI · 148">GUI · 148 <span class="sort-arrow" aria-hidden="true">↕</span></button></th><th scope="col"><button type="button" data-sort="steps" title="Mean steps per task over all 300 tasks, including unsuccessful runs." aria-label="Sort by Steps">Steps <span class="sort-arrow" aria-hidden="true">↕</span></button></th><th scope="col"><button type="button" data-sort="tokens_k" title="Mean output tokens per decision step, in thousands, averaged over all 300 tasks." aria-label="Sort by Tokens (K)">Tokens (K) <span class="sort-arrow" aria-hidden="true">↕</span></button></th><th scope="col"><button type="button" data-sort="cost" title="Mean API cost in US dollars per task over all 300 tasks, including unsuccessful runs." aria-label="Sort by Cost ($)">Cost ($) <span class="sort-arrow" aria-hidden="true">↕</span></button></th></tr></thead><tbody><tr><td><span class="model-cell"><span class="rank">01</span><img src="assets/logos/claude.webp" alt="" width="22" height="22">Claude Opus 5</span></td><td class="score-cell"><span class="scorebar" aria-hidden="true"><i style="width:44.3%"></i></span>44.3</td><td>47.9</td><td>40.5</td><td>70.2</td><td>2.4</td><td>19.02</td></tr>
 <tr><td><span class="model-cell"><span class="rank">02</span><img src="assets/logos/openai.webp" alt="" width="22" height="22">GPT-5.6 Sol</span></td><td class="score-cell"><span class="scorebar" aria-hidden="true"><i style="width:38.0%"></i></span>38.0</td><td>47.1</td><td>28.6</td><td>54.9</td><td>1.0</td><td>9.73</td></tr>
 <tr><td><span class="model-cell"><span class="rank">03</span><img src="assets/logos/qwen.webp" alt="" width="22" height="22">Qwen3.8 Max</span></td><td class="score-cell"><span class="scorebar" aria-hidden="true"><i style="width:25.8%"></i></span>25.8</td><td>34.7</td><td>16.6</td><td>108.1</td><td>2.6</td><td>6.52</td></tr>
 <tr><td><span class="model-cell"><span class="rank">04</span><img src="assets/logos/deepseek.webp" alt="" width="22" height="22">DeepSeek V4.1 Flash</span></td><td class="score-cell"><span class="scorebar" aria-hidden="true"><i style="width:25.5%"></i></span>25.5</td><td>48.3</td><td>2.0</td><td>116.2</td><td>9.9</td><td>0.81</td></tr>
@@ -146,30 +135,24 @@
 <tr><td><span class="model-cell"><span class="rank">06</span><img src="assets/logos/kimi.webp" alt="" width="22" height="22">Kimi K3</span></td><td class="score-cell"><span class="scorebar" aria-hidden="true"><i style="width:24.1%"></i></span>24.1</td><td>31.3</td><td>16.7</td><td>92.5</td><td>0.9</td><td>5.90</td></tr>
 <tr><td><span class="model-cell"><span class="rank">07</span><img src="assets/logos/qwen.webp" alt="" width="22" height="22">Qwen3.8 Flash</span></td><td class="score-cell"><span class="scorebar" aria-hidden="true"><i style="width:16.1%"></i></span>16.1</td><td>30.8</td><td>1.0</td><td>120.5</td><td>1.3</td><td>0.45</td></tr></tbody></table></div>
   </div>
-  <div class="table-notes"><p>EngiScore: higher is better. Steps and API cost: per-task means over all 300 tasks, including unsuccessful runs. Tokens (K): output tokens per decision step, averaged over the 300 tasks and reported in thousands. Lower Steps, Tokens, and Cost are preferred. Click a column heading to sort.</p><p id="subset-note">CLI and GUI scores are measured on different task subsets, not a paired comparison of the same tasks. Scores are reported as in the supplied manuscript.</p></div>
   <p class="sr-only" id="sort-status" role="status" aria-live="polite"></p>
-  <div class="findings">
-    <div class="finding"><strong>44.3</strong><p><b>Highest overall EngiScore</b><br>Claude Opus 5 leads the main evaluation.</p></div>
-    <div class="finding"><strong>3.6%</strong><p><b>Multi-software success</b><br>6 of 168 attempts succeed across all seven models.</p></div>
-    <div class="finding"><strong>128</strong><p><b>Tasks with zero scores for every model</b><br>Out of the 300 tasks in the main evaluation.</p></div>
-  </div>
-  <div class="figure-grid"><figure class="figure">
-    <button class="figure-button" type="button" data-figure="assets/figures/domain_performance_radar.webp" data-pdf="assets/figures/domain_performance_radar.pdf" aria-label="Enlarge: Model performance across the six engineering domains">
+  <div class="figure-grid results-figures"><figure class="figure" style="--figure-width:420px">
+    <button class="figure-button" type="button" data-figure="assets/figures/domain_performance_radar.webp" aria-label="Enlarge: Model performance across the six engineering domains" aria-describedby="domain_performance_radar-caption">
       <img src="assets/figures/domain_performance_radar.webp" alt="Model performance across the six engineering domains" width="1716" height="2200" loading="lazy" decoding="async">
-    </button><figcaption><strong>Performance by domain.</strong> Tasks spanning multiple domains contribute to each relevant domain. <a href="assets/figures/domain_performance_radar.pdf" target="_blank" rel="noopener">View PDF ↗</a></figcaption>
-    </figure><figure class="figure">
-    <button class="figure-button" type="button" data-figure="assets/figures/failure_modes.webp" data-pdf="assets/figures/failure_modes.pdf" aria-label="Enlarge: Failure modes by model in the main evaluation">
+    </button><figcaption id="domain_performance_radar-caption" class="sr-only">Tasks spanning multiple domains count in each relevant domain.</figcaption>
+    </figure><figure class="figure" style="--figure-width:560px">
+    <button class="figure-button" type="button" data-figure="assets/figures/failure_modes.webp" aria-label="Enlarge: Failure modes by model in the main evaluation" aria-describedby="failure_modes-caption">
       <img src="assets/figures/failure_modes.webp" alt="Failure modes by model in the main evaluation" width="2200" height="1358" loading="lazy" decoding="async">
-    </button><figcaption><strong>Failure analysis.</strong> Declared completion with zero credit and decision-turn exhaustion account for 94.1% of analyzed main-evaluation failures. Missing-field and missing-file failures are excluded. <a href="assets/figures/failure_modes.pdf" target="_blank" rel="noopener">View PDF ↗</a></figcaption>
+    </button><figcaption id="failure_modes-caption" class="sr-only">Main-evaluation failures; missing-field and missing-file cases excluded.</figcaption>
     </figure></div>
 </div></section>
 
 <section class="section" id="analysis"><div class="container">
   <div class="section-heading"><h2>Analysis</h2><p>Controlled ablations vary visual inputs, accessibility information, screenshot resolution, and interaction history.</p></div>
-  <figure class="figure">
-    <button class="figure-button" type="button" data-figure="assets/figures/observation_history_ablation.webp" data-pdf="assets/figures/observation_history_ablation.pdf" aria-label="Enlarge: Effects of accessibility information, resolution, and interaction history">
+  <figure class="figure" style="--figure-width:880px">
+    <button class="figure-button" type="button" data-figure="assets/figures/observation_history_ablation.webp" aria-label="Enlarge: Effects of accessibility information, resolution, and interaction history" aria-describedby="observation_history_ablation-caption">
       <img src="assets/figures/observation_history_ablation.webp" alt="Effects of accessibility information, resolution, and interaction history" width="2200" height="664" loading="lazy" decoding="async">
-    </button><figcaption><strong>Observation and history ablations.</strong> Accessibility and resolution use GUI tasks; history includes both interfaces. Resolution scales are relative to 1920 × 1080. <a href="assets/figures/observation_history_ablation.pdf" target="_blank" rel="noopener">View PDF ↗</a></figcaption>
+    </button><figcaption id="observation_history_ablation-caption" class="sr-only">Accessibility and resolution: GUI tasks. History: both interfaces. Resolution is relative to 1920 × 1080.</figcaption>
     </figure>
   <div class="insight-grid">
     <article><h3>Reference images in the message</h3><p>For GPT-5.6 Sol, GUI EngiScore rises from 15.0 to 31.7 when the reference drawing is shown directly in the task message. Improvements are not uniform across individual tasks.</p></article>
@@ -177,17 +160,17 @@
     <article><h3>History length is model dependent</h3><p>Gemini benefits from a 15-turn window; GPT largely plateaus after 10 turns. Kimi performs best at 10, with a longer window reducing its score and increasing cost.</p></article>
   </div>
   <div class="small-tables">
-    <div><h3>Initial-image presentation</h3><div class="table-scroll"><table><caption class="sr-only">EngiScore by initial-image presentation</caption><thead><tr><th scope="col" rowspan="2">Model</th><th scope="colgroup" colspan="2">GUI</th><th scope="colgroup" colspan="2">CLI</th></tr><tr><th scope="col">Env.</th><th scope="col">Message</th><th scope="col">Env.</th><th scope="col">Message</th></tr></thead><tbody><tr><td>GPT-5.6 Sol</td><td>15.0</td><td>31.7</td><td>63.3</td><td>68.3</td></tr><tr><td>Gemini 3.7 Flash</td><td>3.3</td><td>10.0</td><td>38.3</td><td>40.0</td></tr><tr><td>Kimi K3</td><td>6.7</td><td>10.0</td><td>40.0</td><td>36.7</td></tr></tbody></table></div><p>Env.: reference drawing available in the environment. Message: reference drawing included in the initial message.</p></div>
-    <div><h3>Runtime image access in CLI</h3><div class="table-scroll"><table><caption class="sr-only">EngiScore with runtime image access disabled or enabled</caption><thead><tr><th scope="col" rowspan="2">Model</th><th scope="colgroup" colspan="2">With initial image</th><th scope="colgroup" colspan="2">Without initial image</th></tr><tr><th scope="col">Off</th><th scope="col">On</th><th scope="col">Off</th><th scope="col">On</th></tr></thead><tbody><tr><td>GPT-5.6 Sol</td><td>66.7</td><td>68.3</td><td>48.1</td><td>41.5</td></tr><tr><td>Gemini 3.7 Flash</td><td>36.7</td><td>40.0</td><td>33.3</td><td>36.6</td></tr><tr><td>Kimi K3</td><td>41.7</td><td>36.7</td><td>31.5</td><td>26.5</td></tr></tbody></table></div><p>Off / On: whether the agent can inspect images through <code>readimg</code> during execution.</p></div>
+    <div><h3>Initial-image presentation</h3><div class="table-scroll"><table><caption class="sr-only">EngiScore by initial-image presentation</caption><thead><tr><th scope="col" rowspan="2">Model</th><th scope="colgroup" colspan="2">GUI</th><th scope="colgroup" colspan="2">CLI</th></tr><tr><th scope="col" title="Reference drawing in the environment">Env.</th><th scope="col" title="Reference drawing in the initial message">Message</th><th scope="col" title="Reference drawing in the environment">Env.</th><th scope="col" title="Reference drawing in the initial message">Message</th></tr></thead><tbody><tr><td>GPT-5.6 Sol</td><td>15.0</td><td>31.7</td><td>63.3</td><td>68.3</td></tr><tr><td>Gemini 3.7 Flash</td><td>3.3</td><td>10.0</td><td>38.3</td><td>40.0</td></tr><tr><td>Kimi K3</td><td>6.7</td><td>10.0</td><td>40.0</td><td>36.7</td></tr></tbody></table></div></div>
+    <div><h3>Runtime image access in CLI</h3><div class="table-scroll"><table><caption class="sr-only">EngiScore with runtime image access disabled or enabled</caption><thead><tr><th scope="col" rowspan="2">Model</th><th scope="colgroup" colspan="2">With initial image</th><th scope="colgroup" colspan="2">Without initial image</th></tr><tr><th scope="col">Off</th><th scope="col">On</th><th scope="col">Off</th><th scope="col">On</th></tr></thead><tbody><tr><td>GPT-5.6 Sol</td><td>66.7</td><td>68.3</td><td>48.1</td><td>41.5</td></tr><tr><td>Gemini 3.7 Flash</td><td>36.7</td><td>40.0</td><td>33.3</td><td>36.6</td></tr><tr><td>Kimi K3</td><td>41.7</td><td>36.7</td><td>31.5</td><td>26.5</td></tr></tbody></table></div></div>
   </div>
 </div></section>
 
 <section class="section" id="cases"><div class="container">
   <div class="section-heading"><h2>Case studies</h2><p>Four single-software GUI workflows from the paper. Each passes its task-specific artifact checks and receives a score of 1.0.</p></div>
-  <figure class="figure">
-    <button class="figure-button" type="button" data-figure="assets/figures/successful_gui_workflows.webp" data-pdf="assets/figures/successful_gui_workflows.pdf" aria-label="Enlarge: Verified successful GUI workflows in KiCad, AutoCAD, SolidWorks, and Blender">
+  <figure class="figure" style="--figure-width:940px">
+    <button class="figure-button" type="button" data-figure="assets/figures/successful_gui_workflows.webp" aria-label="Enlarge: Verified successful GUI workflows in KiCad, AutoCAD, SolidWorks, and Blender">
       <img src="assets/figures/successful_gui_workflows.webp" alt="Verified successful GUI workflows in KiCad, AutoCAD, SolidWorks, and Blender" width="2200" height="1888" loading="lazy" decoding="async">
-    </button><figcaption><strong>Successful GUI workflows.</strong> Intermediate actions lead to deliverables that pass the artifact verifiers. <a href="assets/figures/successful_gui_workflows.pdf" target="_blank" rel="noopener">View PDF ↗</a></figcaption>
+    </button>
     </figure>
   <div class="case-list">
     <article><span class="case-name">EDA / KiCad</span><h3>Connect a data bus and preserve the circuit</h3><p>Eight distinct data nets establish the required MCU–SRAM mapping. The saved schematic retains the existing circuitry and passes with zero electrical-rule errors.</p></article>
@@ -195,14 +178,13 @@
     <article><span class="case-name">CAD / SolidWorks</span><h3>Align parts while preserving geometry</h3><p>The sliding block is positioned against the base. The exported STEP retains both independent solids and their original dimensions.</p></article>
     <article><span class="case-name">3D visualization / Blender</span><h3>Deliver a scene with a packed AO bake</h3><p>A 512 × 512 ambient-occlusion image is baked and packed into the saved native scene, preserving the computed pixels in the deliverable.</p></article>
   </div>
-  <details><summary>Where multi-software workflows break down</summary>
-    <figure class="figure">
-    <button class="figure-button" type="button" data-figure="assets/figures/multi_software_failure_cases.webp" data-pdf="assets/figures/multi_software_failure_cases.pdf" aria-label="Enlarge: Four multi-software failures compared with reference artifacts">
+  <details open><summary>Where multi-software workflows break down</summary>
+    <figure class="figure" style="--figure-width:940px">
+    <button class="figure-button" type="button" data-figure="assets/figures/multi_software_failure_cases.webp" aria-label="Enlarge: Four multi-software failures compared with reference artifacts">
       <img src="assets/figures/multi_software_failure_cases.webp" alt="Four multi-software failures compared with reference artifacts" width="2200" height="2005" loading="lazy" decoding="async">
-    </button><figcaption><strong>Multi-software failure cases.</strong> Recorded operations and submitted data compared with independently rendered reference artifacts. <a href="assets/figures/multi_software_failure_cases.pdf" target="_blank" rel="noopener">View PDF ↗</a></figcaption>
+    </button>
     </figure>
     <p style="margin-top:20px">The recorded failures span import-scale errors, incorrect action targeting, and mismatches between submitted representations and verifier expectations. In the load case, a pressure representation does not satisfy the verifier’s force/displacement check; in the CSV case, an unrecognized diameter-field name stops evaluation before downstream geometry checks.</p>
-    <p class="table-notes">All four illustrated runs receive zero credit. The examples distinguish execution errors from representation and schema mismatches; they do not establish that every zero-score artifact is physically invalid.</p>
   </details>
 </div></section>
 
@@ -221,5 +203,5 @@
 </div></section>
 </main>
 <footer class="site-footer"><div class="container footer-inner"><span><strong>EngiWorld</strong> · Professional engineering, measured through artifacts.</span><a href="https://github.com/Hongcheng-Gao/EngiWorld" target="_blank" rel="noopener">Explore the benchmark ↗</a></div></footer>
-<dialog class="lightbox" id="figure-dialog" aria-labelledby="figure-dialog-title"><div class="lightbox-header"><p id="figure-dialog-title">Figure</p><button class="lightbox-close" type="button" aria-label="Close figure">✕</button></div><div class="lightbox-body"><img id="figure-dialog-image" alt=""></div><div class="lightbox-footer"><a id="figure-dialog-pdf" target="_blank" rel="noopener">Open original PDF ↗</a></div></dialog>
+<dialog class="lightbox" id="figure-dialog" aria-labelledby="figure-dialog-title"><div class="lightbox-header"><p id="figure-dialog-title">Figure</p><button class="lightbox-close" type="button" aria-label="Close figure">✕</button></div><div class="lightbox-body"><img id="figure-dialog-image" alt=""></div></dialog>
 </body></html>
