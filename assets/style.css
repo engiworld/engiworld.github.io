@@ -74,8 +74,9 @@ h3 { font-size: 20px; margin: 0 0 8px; }
 .figure-button img { width: 100%; }
 .figure-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: start; max-width: 1020px; margin-inline: auto; }
 .benchmark-figures { max-width: 980px; }
-.results-figures { grid-template-columns: .75fr 1fr; margin-top: 8px; }
+.results-figures { grid-template-columns: minmax(0, 19fr) minmax(0, 28fr); align-items: center; gap: 40px; max-width: 980px; margin-top: 28px; }
 .figure-grid .figure { margin-top: 28px; }
+.results-figures > .figure { margin: 0 auto; }
 .figure-grid .figure-button { display: block; }
 .figure-grid .figure-button img { object-fit: contain; }
 .task-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px 28px; margin-top: 26px; }
@@ -189,6 +190,7 @@ details .figure { margin-top: 24px; }
   .task-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 32px; }
   .verification, .insight-grid { gap: 24px; }
   .figure-grid { grid-template-columns: 1fr; gap: 16px; max-width: 560px; }
+  .results-figures { grid-template-columns: 1fr; gap: 24px; }
   .small-tables { grid-template-columns: 1fr; }
   th, td { padding: 13px; }
 }
@@ -225,6 +227,7 @@ details .figure { margin-top: 24px; }
   .task-count { font-size: 1.4rem; }
   .figure-grid { grid-template-columns: 1fr; gap: 14px; }
   .figure-grid .figure { margin-top: 24px; }
+  .results-figures > .figure { margin: 0 auto; }
   .verification, .insight-grid, .case-list { grid-template-columns: 1fr; gap: 25px; }
   .verification { margin-top: 28px; }
   .tablist { gap: 18px; }
