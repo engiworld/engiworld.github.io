@@ -10,15 +10,16 @@
   <meta property="og:description" content="1,301 expert-curated tasks across 26 professional software platforms. A benchmark for the complete engineering design loop.">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23087d77'/%3E%3Cpath d='M18 17h29v7H26v5h17v7H26v5h21v7H18z' fill='white'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="assets/style.css?v=author-note-20260929">
+  <link rel="stylesheet" href="assets/style.css?v=leaderboard-20261007">
   <script src="assets/results.js?v=tokens-20260929" defer></script>
   <script src="assets/app.js?v=tokens-20260929" defer></script>
+  <script src="assets/leaderboard.js?v=leaderboard-20261007" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header"><div class="container nav-inner">
   <a class="brand" href="#top" aria-label="EngiWorld home">EngiWorld</a>
-  <nav class="nav-links" aria-label="Main navigation"><a href="#overview">Overview</a><a href="#benchmark">Benchmark</a><a href="#results">Results</a><a href="#cases">Cases</a><a href="#citation">Citation</a></nav>
+  <nav class="nav-links" aria-label="Main navigation"><a href="#overview">Overview</a><a href="#benchmark">Benchmark</a><a href="#results">Leaderboard</a><a href="#cases">Cases</a><a href="#citation">Citation</a></nav>
 </div></header>
 <main id="main">
 <section class="hero" id="top"><div class="container">
@@ -105,11 +106,32 @@
 </div></section>
 
 <section class="section" id="results"><div class="container">
-  <div class="section-heading"><h2>Results</h2><p>Seven frontier models evaluated on the same stratified subset of <strong>300 tasks</strong>: 152 CLI and 148 GUI tasks across 73 software–category strata.</p></div>
-  <div class="findings">
-    <div class="finding"><strong>44.3</strong><p><b>Highest overall EngiScore</b><br>Claude Opus 5 leads the main evaluation.</p></div>
-    <div class="finding"><strong>3.6%</strong><p><b>Multi-software success</b><br>6 of 168 attempts succeed across all seven models.</p></div>
-    <div class="finding"><strong>128</strong><p><b>Tasks with zero scores for every model</b><br>Out of the 300 tasks in the main evaluation.</p></div>
+  <div class="section-heading"><h2>Leaderboard</h2><p>Seven frontier models on the same <strong>300-task main evaluation</strong>, covering 152 CLI and 148 GUI tasks.</p></div>
+  <div class="leaderboard-chart">
+    <div class="chart-toolbar">
+      <fieldset class="metric-switch"><legend>X axis</legend><div class="segmented-control" role="group" aria-label="Resource metric">
+        <button type="button" data-chart-x="steps" aria-pressed="true">Steps</button>
+        <button type="button" data-chart-x="tokens_k" aria-pressed="false">Output tokens</button>
+        <button type="button" data-chart-x="cost" aria-pressed="false">API cost</button>
+      </div></fieldset>
+      <fieldset class="metric-switch"><legend>EngiScore</legend><div class="segmented-control" role="group" aria-label="Score subset">
+        <button type="button" data-chart-y="overall" aria-pressed="true">Overall</button>
+        <button type="button" data-chart-y="cli" aria-pressed="false">CLI</button>
+        <button type="button" data-chart-y="gui" aria-pressed="false">GUI</button>
+      </div></fieldset>
+      <span class="evaluation-badge">Main evaluation · 300 tasks</span>
+    </div>
+    <div class="chart-surface"><div class="chart-scroll" tabindex="0" aria-label="Scrollable model comparison chart">
+      <svg id="efficiency-chart" viewBox="0 0 1160 480" width="1160" height="480" role="img" aria-labelledby="efficiency-title efficiency-description">
+        <title id="efficiency-title">EngiWorld model performance and resource use</title>
+        <desc id="efficiency-description">Mean steps per task against overall EngiScore. Exact values are available in the results table below.</desc>
+      </svg>
+    </div>
+    <div class="chart-legend" role="group" aria-label="Highlight a model"><button type="button" data-chart-model="Claude Opus 5" aria-pressed="false"><span class="legend-dot" style="--model-color:#16816b"></span>Claude Opus 5</button><button type="button" data-chart-model="GPT-5.6 Sol" aria-pressed="false"><span class="legend-dot" style="--model-color:#30363f"></span>GPT-5.6 Sol</button><button type="button" data-chart-model="Qwen3.8 Max" aria-pressed="false"><span class="legend-dot" style="--model-color:#7855ba"></span>Qwen3.8 Max</button><button type="button" data-chart-model="DeepSeek V4.1 Flash" aria-pressed="false"><span class="legend-dot" style="--model-color:#397bbd"></span>DeepSeek V4.1 Flash</button><button type="button" data-chart-model="Gemini 3.7 Flash" aria-pressed="false"><span class="legend-dot" style="--model-color:#bd7b1f"></span>Gemini 3.7 Flash</button><button type="button" data-chart-model="Kimi K3" aria-pressed="false"><span class="legend-dot" style="--model-color:#c95180"></span>Kimi K3</button><button type="button" data-chart-model="Qwen3.8 Flash" aria-pressed="false"><span class="legend-dot" style="--model-color:#aa89cc"></span>Qwen3.8 Flash</button></div>
+    <output class="chart-detail" id="chart-detail" aria-live="polite">Select a model to see its exact values.</output>
+    </div>
+    <p class="chart-caption" id="chart-caption">Each point is one model. Steps and cost are per-task means; output tokens are per-step means. Lower resource use and higher EngiScore are better.</p>
+    <noscript><p>The interactive chart requires JavaScript. All seven models and their exact results are available in the table below.</p></noscript>
   </div>
   <div class="results-toolbar">
     <div class="tablist" role="tablist" aria-label="Results view"><button id="tab-overall" type="button" role="tab" aria-selected="true" aria-controls="results-panel" data-view="overall">Overall &amp; interfaces</button><button id="tab-category" type="button" role="tab" aria-selected="false" aria-controls="results-panel" tabindex="-1" data-view="category">Task categories</button></div>
@@ -126,6 +148,11 @@
   </div>
   <div class="table-notes"><p>EngiScore: higher is better. Steps and API cost: per-task means over all 300 tasks, including unsuccessful runs. Tokens (K): output tokens per decision step, averaged over the 300 tasks and reported in thousands. Lower Steps, Tokens, and Cost are preferred. Click a column heading to sort.</p><p id="subset-note">CLI and GUI scores are measured on different task subsets, not a paired comparison of the same tasks. Scores are reported as in the supplied manuscript.</p></div>
   <p class="sr-only" id="sort-status" role="status" aria-live="polite"></p>
+  <div class="findings">
+    <div class="finding"><strong>44.3</strong><p><b>Highest overall EngiScore</b><br>Claude Opus 5 leads the main evaluation.</p></div>
+    <div class="finding"><strong>3.6%</strong><p><b>Multi-software success</b><br>6 of 168 attempts succeed across all seven models.</p></div>
+    <div class="finding"><strong>128</strong><p><b>Tasks with zero scores for every model</b><br>Out of the 300 tasks in the main evaluation.</p></div>
+  </div>
   <div class="figure-grid"><figure class="figure">
     <button class="figure-button" type="button" data-figure="assets/figures/domain_performance_radar.webp" data-pdf="assets/figures/domain_performance_radar.pdf" aria-label="Enlarge: Model performance across the six engineering domains">
       <img src="assets/figures/domain_performance_radar.webp" alt="Model performance across the six engineering domains" width="1716" height="2200" loading="lazy" decoding="async">
@@ -193,6 +220,6 @@
   <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
 </div></section>
 </main>
-<footer class="site-footer"><div class="container footer-inner"><span><strong>EngiWorld</strong> · Professional engineering, measured through artifacts.</span><span>Project-page structure inspired by SpatialWorld.</span></div></footer>
+<footer class="site-footer"><div class="container footer-inner"><span><strong>EngiWorld</strong> · Professional engineering, measured through artifacts.</span><a href="https://github.com/Hongcheng-Gao/EngiWorld" target="_blank" rel="noopener">Explore the benchmark ↗</a></div></footer>
 <dialog class="lightbox" id="figure-dialog" aria-labelledby="figure-dialog-title"><div class="lightbox-header"><p id="figure-dialog-title">Figure</p><button class="lightbox-close" type="button" aria-label="Close figure">✕</button></div><div class="lightbox-body"><img id="figure-dialog-image" alt=""></div><div class="lightbox-footer"><a id="figure-dialog-pdf" target="_blank" rel="noopener">Open original PDF ↗</a></div></dialog>
 </body></html>
