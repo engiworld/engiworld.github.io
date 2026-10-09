@@ -4,6 +4,7 @@
   const scope = window.ENGIWORLD_SCOPE;
   const chart = document.querySelector('#efficiency-chart');
   if (!chart || !Array.isArray(results)) return;
+  const detail = document.querySelector('#chart-detail');
   const caption = document.querySelector('#chart-caption');
   const xButtons = [...document.querySelectorAll('[data-chart-x]')];
   const yButtons = [...document.querySelectorAll('[data-chart-y]')];
@@ -49,6 +50,14 @@
     });
   }
 
+  function describeModel(name) {
+    const row = results.find(model => model.name === name);
+    if (!row) return;
+    detail.textContent = `EngiScore: ${row[yKey].toFixed(1)}`;
+    detail.setAttribute('aria-label', `${row.name}, ${subsets[yKey]} EngiScore ${row[yKey].toFixed(1)}`);
+    detail.hidden = false;
+  }
+
   function highlight(name) {
     selected = selected === name ? null : name;
     modelButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.chartModel === selected)));
@@ -87,7 +96,11 @@
         event.preventDefault(); highlight(point.dataset.point);
         chart.querySelector(`[data-point="${point.dataset.point}"]`).focus();
       });
+      point.addEventListener('mouseenter', () => describeModel(point.dataset.point));
+      point.addEventListener('focus', () => describeModel(point.dataset.point));
     });
+    if (selected) describeModel(selected);
+    else { detail.textContent = ''; detail.hidden = true; }
   }
 
   xButtons.forEach(button => button.addEventListener('click', () => {
