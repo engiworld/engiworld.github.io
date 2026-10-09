@@ -53,8 +53,8 @@
   function describeModel(name) {
     const row = results.find(model => model.name === name);
     if (!row) return;
-    detail.textContent = `EngiScore: ${row[yKey].toFixed(1)}`;
-    detail.setAttribute('aria-label', `${row.name}, ${subsets[yKey]} EngiScore ${row[yKey].toFixed(1)}`);
+    detail.textContent = `EngiScore: ${row[yKey].toFixed(1)} · Turns: ${row.turns.toFixed(1)}`;
+    detail.setAttribute('aria-label', `${row.name}, ${subsets[yKey]} EngiScore ${row[yKey].toFixed(1)}, mean turns per task ${row.turns.toFixed(1)}`);
     detail.hidden = false;
   }
 
