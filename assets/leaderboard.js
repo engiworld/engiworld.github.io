@@ -1,6 +1,7 @@
 (() => {
   'use strict';
   const results = window.ENGIWORLD_RESULTS;
+  const scope = window.ENGIWORLD_SCOPE;
   const chart = document.querySelector('#efficiency-chart');
   if (!chart || !Array.isArray(results)) return;
   const detail = document.querySelector('#chart-detail');
@@ -8,14 +9,15 @@
   const xButtons = [...document.querySelectorAll('[data-chart-x]')];
   const yButtons = [...document.querySelectorAll('[data-chart-y]')];
   const modelButtons = [...document.querySelectorAll('[data-chart-model]')];
-  const colors = ['#16816b', '#30363f', '#7855ba', '#397bbd', '#bd7b1f', '#c95180', '#aa89cc'];
+  const palette = { claude: '#16816b', openai: '#30363f', deepseek: '#7855ba', gemini: '#bd7b1f', kimi: '#c95180' };
+  const colors = results.map(row => row.name === 'Qwen3.8 Flash' ? '#aa89cc' : row.logo === 'qwen' ? '#397bbd' : palette[row.logo]);
   const metrics = {
-    steps: { label: 'Mean steps / task', short: 'steps / task', interval: 25, format: v => v.toFixed(1) },
-    tokens_k: { label: 'Mean output tokens / step (K)', short: 'K output tokens / step', interval: 2, format: v => v.toFixed(1) },
+    turns: { label: 'Mean turns / task', short: 'turns / task', interval: 25, format: v => v.toFixed(1) },
+    tokens_k: { label: 'Mean output tokens / turn (K)', short: 'K output tokens / turn', interval: 2, format: v => v.toFixed(1) },
     cost: { label: 'Mean API cost / task ($)', short: 'API cost / task', interval: 5, format: v => '$' + v.toFixed(2) }
   };
-  const subsets = { overall: 'Overall · 300 tasks', cli: 'CLI · 152 tasks', gui: 'GUI · 148 tasks' };
-  let xKey = 'steps', yKey = 'overall', selected = null;
+  const subsets = { overall: `Overall · ${scope.evaluation.total} tasks`, cli: `CLI · ${scope.evaluation.cli} tasks`, gui: `GUI · ${scope.evaluation.gui} tasks` };
+  let xKey = 'turns', yKey = 'overall', selected = null;
   const escape = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
   const left = 74, right = 1126, top = 34, bottom = 396, yMax = 60;
 
@@ -81,11 +83,11 @@
       const label = `${row.name}. ${subsets[yKey]} EngiScore ${row[yKey].toFixed(1)}. ${metric.format(row[xKey])} ${metric.short}.`;
       return `<g class="chart-point${muted}" tabindex="0" role="button" data-point="${escape(row.name)}" aria-pressed="${selected === row.name}" aria-label="${escape(label)}"><title>${escape(label)}</title><line x1="${x}" y1="${y}" x2="${anchorX}" y2="${labelY - 6}" stroke="${color}" stroke-opacity=".35"/><circle class="chart-marker" cx="${x}" cy="${y}" r="7.5" fill="${color}" stroke="white" stroke-width="2.5"/><image href="assets/logos/${row.logo}.webp" x="${box.x}" y="${box.y + 2}" width="20" height="20" aria-hidden="true"/><text class="chart-model-label" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" x="${box.x + 27}" y="${labelY}" fill="${color}">${escape(row.name)}</text></g>`;
     }).join('');
-    chart.innerHTML = `<title id="efficiency-title">${escape(metric.label)} against ${subsets[yKey]} EngiScore</title><desc id="efficiency-description">One point per model, using the supplied main evaluation. Resource means cover all 300 tasks. Exact values appear in the table below.</desc>${grid}<path class="chart-axis" fill="none" stroke="#536266" stroke-width="1.5" d="M${left} ${top}V${bottom}H${right}"/>${labels}<text class="chart-axis-label" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#38474b" x="${(left + right) / 2}" y="464" text-anchor="middle">${escape(metric.label)}</text><text class="chart-axis-label" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#38474b" transform="translate(22 ${(top + bottom) / 2}) rotate(-90)" text-anchor="middle">${escape(subsets[yKey])} EngiScore</text>`;
+    chart.innerHTML = `<title id="efficiency-title">${escape(metric.label)} against ${subsets[yKey]} EngiScore</title><desc id="efficiency-description">One point per model, using the supplied main evaluation. Resource means cover all ${scope.evaluation.total} tasks. Exact values appear in the table below.</desc>${grid}<path class="chart-axis" fill="none" stroke="#536266" stroke-width="1.5" d="M${left} ${top}V${bottom}H${right}"/>${labels}<text class="chart-axis-label" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#38474b" x="${(left + right) / 2}" y="464" text-anchor="middle">${escape(metric.label)}</text><text class="chart-axis-label" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#38474b" transform="translate(22 ${(top + bottom) / 2}) rotate(-90)" text-anchor="middle">${escape(subsets[yKey])} EngiScore</text>`;
     caption.textContent = (xKey === 'tokens_k'
-      ? 'Output tokens are per-step means (K), averaged over 300 tasks; they are not total tokens per task.'
-      : `${xKey === 'steps' ? 'Steps' : 'API cost'} are per-task means over all 300 tasks, including unsuccessful runs.`)
-      + (yKey === 'overall' ? ' Each point is one model. Lower resource use and higher EngiScore are better.' : ' The selected score uses its CLI or GUI subset; resource means still cover all 300 tasks. CLI and GUI use different tasks.');
+      ? `Output tokens are per-turn means (K), averaged over ${scope.evaluation.total} tasks; they are not total tokens per task.`
+      : `${xKey === 'turns' ? 'Turns' : 'API cost'} are per-task means over all ${scope.evaluation.total} tasks, including unsuccessful runs.`)
+      + (yKey === 'overall' ? ' Each point is one model. Lower resource use and higher EngiScore are better.' : ` The selected score uses its CLI or GUI subset; resource means still cover all ${scope.evaluation.total} tasks. CLI and GUI use different tasks.`);
     chart.querySelectorAll('[data-point]').forEach(point => {
       point.addEventListener('click', () => highlight(point.dataset.point));
       point.addEventListener('keydown', event => {

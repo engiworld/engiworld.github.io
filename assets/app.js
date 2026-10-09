@@ -1,20 +1,20 @@
 (() => {
   'use strict';
   const results = window.ENGIWORLD_RESULTS;
+  const scope = window.ENGIWORLD_SCOPE;
   const table = document.querySelector('#results-table');
   const columns = {
-    overall: [['overall', 'EngiScore'], ['cli', 'CLI · 152'], ['gui', 'GUI · 148'], ['steps', 'Steps'], ['tokens_k', 'Tokens (K)'], ['cost', 'Cost ($)']],
-    category: [['overall', 'EngiScore'], ['single', 'Single · 175'], ['multi', 'Multi · 24'], ['selection', 'Select. · 28'], ['quantitative', 'Quant. · 33'], ['image', 'Image · 36'], ['open', 'Open · 4']]
+    overall: [['overall', 'EngiScore'], ['cli', `CLI · ${scope.evaluation.cli}`], ['gui', `GUI · ${scope.evaluation.gui}`], ['turns', 'Turns'], ['tokens_k', 'Tokens (K)'], ['cost', 'Cost ($)']],
+    category: [['overall', 'EngiScore'], ...scope.task_types.map(item => [item.key, `${item.short} · ${item.evaluation_count}`])]
   };
   const descriptions = {
-    overall: 'EngiScore = 100 × mean task score. Binary tasks require every criterion to pass; quantitative tasks score 0–1 after feasibility checks. Infeasible outputs score 0.',
-    cli: 'CLI EngiScore over 152 tasks; CLI and GUI use different task subsets.',
-    gui: 'GUI EngiScore over 148 tasks; CLI and GUI use different task subsets.',
-    steps: 'Mean steps per task over all 300 tasks, including unsuccessful runs.',
-    tokens_k: 'Mean output tokens per decision step, in thousands, averaged over all 300 tasks.',
-    cost: 'Mean API cost in US dollars per task over all 300 tasks, including unsuccessful runs.',
-    single: 'Single-software · 175 tasks', multi: 'Multi-software · 24 tasks', selection: 'Software-selection · 28 tasks',
-    quantitative: 'Quantitative design · 33 tasks', image: 'Image-based modeling · 36 tasks', open: 'Open-ended · 4 tasks'
+    overall: 'EngiScore = 100 × mean task score. Binary tasks require every criterion to pass; Design Optimization tasks score 0–1 after feasibility checks. Infeasible outputs score 0.',
+    cli: `CLI EngiScore over ${scope.evaluation.cli} tasks; CLI and GUI use different task subsets.`,
+    gui: `GUI EngiScore over ${scope.evaluation.gui} tasks; CLI and GUI use different task subsets.`,
+    turns: `Mean turns per task over all ${scope.evaluation.total} tasks, including unsuccessful runs. One turn is one model call.`,
+    tokens_k: `Mean output tokens per turn, in thousands, averaged over all ${scope.evaluation.total} tasks.`,
+    cost: `Mean API cost in US dollars per task over all ${scope.evaluation.total} tasks, including unsuccessful runs.`,
+    ...Object.fromEntries(scope.task_types.map(item => [item.key, `${item.name} · ${item.evaluation_count} tasks`]))
   };
   let currentView = 'overall', sortKey = 'overall', ascending = false;
   function renderResults() {
@@ -26,7 +26,7 @@
   table.addEventListener('click', event => {
     const button = event.target.closest('[data-sort]');
     if (!button) return;
-    ascending = button.dataset.sort === sortKey ? !ascending : ['steps','tokens_k','cost'].includes(button.dataset.sort);
+    ascending = button.dataset.sort === sortKey ? !ascending : ['turns','tokens_k','cost'].includes(button.dataset.sort);
     sortKey = button.dataset.sort;
     renderResults();
     table.querySelector(`[data-sort="${sortKey}"]`).focus({preventScroll:true});
