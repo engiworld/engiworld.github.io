@@ -4,8 +4,8 @@
   const scope = window.ENGIWORLD_SCOPE;
   const table = document.querySelector('#results-table');
   const columns = {
-    overall: [['overall', 'EngiScore'], ['cli', `CLI · ${scope.evaluation.cli}`], ['gui', `GUI · ${scope.evaluation.gui}`], ['turns', 'Turns'], ['tokens_k', 'Tokens (K)'], ['cost', 'Cost ($)']],
-    category: [['overall', 'EngiScore'], ...scope.task_types.map(item => [item.key, `${item.short} · ${item.evaluation_count}`])]
+    overall: [['overall', 'EngiScore'], ['cli', `CLI (${scope.evaluation.cli})`], ['gui', `GUI (${scope.evaluation.gui})`], ['turns', 'Turns'], ['tokens_k', 'Tokens (K)'], ['cost', 'Cost ($)']],
+    category: [['overall', 'EngiScore'], ...scope.task_types.map(item => [item.key, `${item.short} (${item.evaluation_count})`])]
   };
   const descriptions = {
     overall: 'EngiScore = 100 × mean task score. Binary tasks require every criterion to pass; Design Optimization tasks score 0–1 after feasibility checks. Infeasible outputs score 0.',
@@ -14,7 +14,7 @@
     turns: `Mean turns per task over all ${scope.evaluation.total} tasks, including unsuccessful runs. One turn is one model call.`,
     tokens_k: `Mean output tokens per turn, in thousands, averaged over all ${scope.evaluation.total} tasks.`,
     cost: `Mean API cost in US dollars per task over all ${scope.evaluation.total} tasks, including unsuccessful runs.`,
-    ...Object.fromEntries(scope.task_types.map(item => [item.key, `${item.name} · ${item.evaluation_count} tasks`]))
+    ...Object.fromEntries(scope.task_types.map(item => [item.key, `${item.name} (${item.evaluation_count} tasks)`]))
   };
   let currentView = 'overall', sortKey = 'overall', ascending = false;
   function renderResults() {

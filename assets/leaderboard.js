@@ -4,13 +4,12 @@
   const scope = window.ENGIWORLD_SCOPE;
   const chart = document.querySelector('#efficiency-chart');
   if (!chart || !Array.isArray(results)) return;
-  const detail = document.querySelector('#chart-detail');
   const caption = document.querySelector('#chart-caption');
   const xButtons = [...document.querySelectorAll('[data-chart-x]')];
   const yButtons = [...document.querySelectorAll('[data-chart-y]')];
   const modelButtons = [...document.querySelectorAll('[data-chart-model]')];
-  const palette = { claude: '#16816b', openai: '#30363f', deepseek: '#7855ba', gemini: '#bd7b1f', kimi: '#c95180' };
-  const colors = results.map(row => row.name === 'Qwen3.8 Flash' ? '#aa89cc' : row.logo === 'qwen' ? '#397bbd' : palette[row.logo]);
+  const palette = { claude: '#bd7b1f', openai: '#30363f', deepseek: '#397bbd', gemini: '#16816b', kimi: '#c95180' };
+  const colors = results.map(row => row.name === 'Qwen3.8 Flash' ? '#aa89cc' : row.logo === 'qwen' ? '#7855ba' : palette[row.logo]);
   const metrics = {
     turns: { label: 'Mean turns / task', short: 'turns / task', interval: 25, format: v => v.toFixed(1) },
     tokens_k: { label: 'Mean output tokens / turn (K)', short: 'K output tokens / turn', interval: 2, format: v => v.toFixed(1) },
@@ -50,13 +49,6 @@
     });
   }
 
-  function describeModel(name) {
-    const row = results.find(model => model.name === name);
-    if (!row) return;
-    detail.hidden = false;
-    detail.innerHTML = `<strong>${escape(row.name)}</strong> · ${subsets[yKey]} EngiScore <strong>${row[yKey].toFixed(1)}</strong> · ${metrics[xKey].format(row[xKey])} ${metrics[xKey].short}`;
-  }
-
   function highlight(name) {
     selected = selected === name ? null : name;
     modelButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.chartModel === selected)));
@@ -81,9 +73,9 @@
       const anchorX = onLeft ? box.x + box.w : box.x;
       const muted = selected && selected !== row.name ? ' is-muted' : '';
       const label = `${row.name}. ${subsets[yKey]} EngiScore ${row[yKey].toFixed(1)}. ${metric.format(row[xKey])} ${metric.short}.`;
-      return `<g class="chart-point${muted}" tabindex="0" role="button" data-point="${escape(row.name)}" aria-pressed="${selected === row.name}" aria-label="${escape(label)}"><title>${escape(label)}</title><line x1="${x}" y1="${y}" x2="${anchorX}" y2="${labelY - 6}" stroke="${color}" stroke-opacity=".35"/><circle class="chart-marker" cx="${x}" cy="${y}" r="7.5" fill="${color}" stroke="white" stroke-width="2.5"/><image href="assets/logos/${row.logo}.webp" x="${box.x}" y="${box.y + 2}" width="20" height="20" aria-hidden="true"/><text class="chart-model-label" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" x="${box.x + 27}" y="${labelY}" fill="${color}">${escape(row.name)}</text></g>`;
+      return `<g class="chart-point${muted}" tabindex="0" role="button" data-point="${escape(row.name)}" aria-pressed="${selected === row.name}" aria-label="${escape(label)}"><line x1="${x}" y1="${y}" x2="${anchorX}" y2="${labelY - 6}" stroke="${color}" stroke-opacity=".35"/><circle class="chart-marker" cx="${x}" cy="${y}" r="7.5" fill="${color}" stroke="white" stroke-width="2.5"/><image href="assets/logos/${row.logo}.webp" x="${box.x}" y="${box.y + 2}" width="20" height="20" aria-hidden="true"/><text class="chart-model-label" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" x="${box.x + 27}" y="${labelY}" fill="${color}">${escape(row.name)}</text></g>`;
     }).join('');
-    chart.innerHTML = `<title id="efficiency-title">${escape(metric.label)} against ${subsets[yKey]} EngiScore</title><desc id="efficiency-description">One point per model, using the supplied main evaluation. Resource means cover all ${scope.evaluation.total} tasks. Exact values appear in the table below.</desc>${grid}<path class="chart-axis" fill="none" stroke="#536266" stroke-width="1.5" d="M${left} ${top}V${bottom}H${right}"/>${labels}<text class="chart-axis-label" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#38474b" x="${(left + right) / 2}" y="464" text-anchor="middle">${escape(metric.label)}</text><text class="chart-axis-label" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#38474b" transform="translate(22 ${(top + bottom) / 2}) rotate(-90)" text-anchor="middle">${escape(subsets[yKey])} EngiScore</text>`;
+    chart.innerHTML = `<title id="efficiency-title">${escape(metric.label)} against ${subsets[yKey]} EngiScore</title><desc id="efficiency-description">One point per model, using the supplied main evaluation. Resource means cover all ${scope.evaluation.total} tasks. Exact values appear in the table below.</desc>${grid}<path class="chart-axis" fill="none" stroke="#536266" stroke-width="1.5" d="M${left} ${top}V${bottom}H${right}"/>${labels}<text class="chart-axis-label" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#38474b" x="${(left + right) / 2}" y="464" text-anchor="middle">${escape(metric.label)}</text><text class="chart-axis-label" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600" fill="#38474b" transform="translate(22 ${(top + bottom) / 2}) rotate(-90)" text-anchor="middle">EngiScore</text>`;
     caption.textContent = (xKey === 'tokens_k'
       ? `Output tokens are per-turn means (K), averaged over ${scope.evaluation.total} tasks; they are not total tokens per task.`
       : `${xKey === 'turns' ? 'Turns' : 'API cost'} are per-task means over all ${scope.evaluation.total} tasks, including unsuccessful runs.`)
@@ -95,11 +87,7 @@
         event.preventDefault(); highlight(point.dataset.point);
         chart.querySelector(`[data-point="${point.dataset.point}"]`).focus();
       });
-      point.addEventListener('mouseenter', () => describeModel(point.dataset.point));
-      point.addEventListener('focus', () => describeModel(point.dataset.point));
     });
-    if (selected) describeModel(selected);
-    else { detail.textContent = ''; detail.hidden = true; }
   }
 
   xButtons.forEach(button => button.addEventListener('click', () => {

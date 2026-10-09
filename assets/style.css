@@ -187,7 +187,6 @@ details .figure { margin-top: 24px; }
 .chart-legend button { display: inline-flex; align-items: center; gap: 7px; padding: 5px 7px; min-height: 34px; background: transparent; border: 1px solid transparent; border-radius: 6px; font-size: var(--small-size); line-height: 1.4; }
 .chart-legend button:hover, .chart-legend button[aria-pressed="true"] { background: #f3f7f6; border-color: #dce5e2; }
 .legend-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--model-color); }
-.chart-detail { display: block; min-height: 42px; text-align: center; padding: 9px 16px; border-top: 1px solid var(--line); font-size: var(--small-size); background: #fafcfb; }
 @media (max-width: 850px) {
   .chart-toolbar { gap: 10px 20px; }
 }
@@ -202,7 +201,6 @@ details .figure { margin-top: 24px; }
   .chart-toolbar { align-items: flex-start; }
   .segmented-control button { padding: 9px 11px; }
   .chart-legend { justify-content: flex-start; gap: 4px 8px; padding: 8px 12px; }
-  .chart-detail { text-align: left; }
 }
 
 @media (max-width: 850px) {
