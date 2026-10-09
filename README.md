@@ -17,6 +17,8 @@ Figures have individual width limits and support enlargement. The domain radar a
 
 The 70-second GUI showcase of 88 distinct successful tasks appears above Overview. It autoplays muted, loops, and includes controls. Reduced-motion preferences disable autoplay.
 
+The video opening follows the 2026-10-09 arXiv manuscript: the current paper title, DCC, all six task-type names, and the 306-task main evaluation (158 CLI / 148 GUI). The approved GUI replay footage is retained.
+
 ## Deployment and preview
 
 The root `index.html` and bundled `assets/` work directly on GitHub Pages. No build step or external JavaScript/font CDN is required. Publication uses this repository's `main` branch and root directory; preserve `.nojekyll`.
