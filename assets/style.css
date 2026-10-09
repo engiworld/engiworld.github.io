@@ -9,6 +9,7 @@
   --font: Arial, Helvetica, sans-serif;
   --body-size: 18px;
   --small-size: 15px;
+  --page-width: 1060px;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 100px; }
@@ -25,7 +26,7 @@ p { margin: 0 0 1.2rem; }
 h1, h2, h3 { line-height: 1.25; font-weight: 600; letter-spacing: -.015em; text-wrap: balance; }
 h2 { font-size: 32px; margin: 0 0 12px; }
 h3 { font-size: 20px; margin: 0 0 8px; }
-.container { width: min(1200px, calc(100% - 64px)); margin-inline: auto; }
+.container { width: min(var(--page-width), calc(100% - 64px)); margin-inline: auto; }
 .narrow { max-width: 960px; }
 .skip-link { position: fixed; top: -100px; left: 20px; padding: 10px; background: #fff; z-index: 100; }
 .skip-link:focus { top: 10px; }

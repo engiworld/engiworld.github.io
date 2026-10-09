@@ -12,12 +12,12 @@
   const palette = { claude: '#bd7b1f', openai: '#30363f', deepseek: '#397bbd', gemini: '#16816b', kimi: '#c95180' };
   const colors = results.map(row => row.name === 'Qwen3.8 Flash' ? '#aa89cc' : row.logo === 'qwen' ? '#7855ba' : palette[row.logo]);
   const metrics = {
-    turns: { label: 'Mean turns / task', short: 'turns / task', interval: 25, format: v => v.toFixed(1) },
-    tokens_k: { label: 'Mean output tokens / turn (K)', short: 'K output tokens / turn', interval: 2, format: v => v.toFixed(1) },
-    cost: { label: 'Mean API cost / task ($)', short: 'API cost / task', interval: 5, format: v => '$' + v.toFixed(2) }
+    turns: { label: 'Mean turns / task', detail: 'Turns', short: 'turns / task', interval: 25, format: v => v.toFixed(1) },
+    tokens_k: { label: 'Mean output tokens / turn (K)', detail: 'Output tokens (K)', short: 'K output tokens / turn', interval: 2, format: v => v.toFixed(1) },
+    cost: { label: 'Mean API cost / task ($)', detail: 'API cost', short: 'API cost / task', interval: 5, format: v => '$' + v.toFixed(2) }
   };
   const subsets = { overall: `Overall · ${scope.evaluation.total} tasks`, cli: `CLI · ${scope.evaluation.cli} tasks`, gui: `GUI · ${scope.evaluation.gui} tasks` };
-  let xKey = 'turns', yKey = 'overall', selected = null;
+  let xKey = 'turns', yKey = 'overall', selected = null, inspected = null;
   const escape = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
   const left = 74, right = 1126, top = 34, bottom = 396, yMax = 60;
 
@@ -53,13 +53,16 @@
   function describeModel(name) {
     const row = results.find(model => model.name === name);
     if (!row) return;
-    detail.textContent = `EngiScore: ${row[yKey].toFixed(1)} · Turns: ${row.turns.toFixed(1)}`;
-    detail.setAttribute('aria-label', `${row.name}, ${subsets[yKey]} EngiScore ${row[yKey].toFixed(1)}, mean turns per task ${row.turns.toFixed(1)}`);
+    inspected = row.name;
+    const metric = metrics[xKey];
+    detail.textContent = `EngiScore: ${row[yKey].toFixed(1)} · ${metric.detail}: ${metric.format(row[xKey])}`;
+    detail.setAttribute('aria-label', `${row.name}, ${subsets[yKey]} EngiScore ${row[yKey].toFixed(1)}, ${metric.format(row[xKey])} ${metric.short}`);
     detail.hidden = false;
   }
 
   function highlight(name) {
     selected = selected === name ? null : name;
+    inspected = selected;
     modelButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.chartModel === selected)));
     render();
   }
@@ -99,7 +102,7 @@
       point.addEventListener('mouseenter', () => describeModel(point.dataset.point));
       point.addEventListener('focus', () => describeModel(point.dataset.point));
     });
-    if (selected) describeModel(selected);
+    if (selected || inspected) describeModel(selected || inspected);
     else { detail.textContent = ''; detail.hidden = true; }
   }
 
