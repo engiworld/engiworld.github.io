@@ -1,0 +1,32 @@
+.wechat-dialog {
+  width: min(460px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  border: 0;
+  padding: 0;
+  border-radius: 12px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 20px 100px #0004;
+}
+.wechat-dialog::backdrop { background: rgba(20, 35, 38, .78); }
+.wechat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+}
+.wechat-header h2 { margin: 0; font-size: 20px; }
+.wechat-close { border: 0; background: transparent; padding: 8px 12px; line-height: 1; }
+.wechat-content { padding: 16px 20px 20px; text-align: center; }
+.wechat-content p { font-size: 15px; margin-bottom: 12px; }
+.wechat-caption { font-weight: 600; }
+.wechat-qr { width: auto; height: auto; max-width: 100%; max-height: 65vh; max-height: 65dvh; margin: 0 auto 12px; }
+.wechat-content .wechat-expiry { color: var(--muted); font-size: 13px; margin: 0; }
+@media print { .wechat-dialog { display: none; } }
