@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#05645e">
+  <title>EngiWorld 云镜像共享申请</title>
+  <style>
+    :root { color-scheme: light; --ink: #253237; --muted: #536568; --teal: #05645e; --line: #c8d6d2; }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: #f6f8f7; font: 16px/1.55 Arial, "PingFang SC", "Microsoft YaHei", sans-serif; }
+    a { color: var(--teal); text-underline-offset: 3px; }
+    header { border-bottom: 1px solid #dce5e1; background: #fff; }
+    .top { max-width: 1060px; margin: auto; padding: 15px 22px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .brand { font-size: 23px; font-weight: 700; letter-spacing: -.05em; text-decoration: none; }
+    .language { color: var(--teal); font: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+    main { max-width: 738px; margin: auto; padding: 38px 20px 64px; }
+    h1 { margin: 0 0 10px; font-size: clamp(28px, 5vw, 38px); line-height: 1.22; letter-spacing: -.035em; }
+    h2 { margin: 0 0 8px; font-size: 21px; }
+    p { margin: 0 0 12px; }
+    .intro { color: var(--muted); margin-bottom: 22px; }
+    .panel { background: #fff; border: 1px solid #d8e2dd; border-radius: 13px; padding: clamp(17px, 4vw, 30px); }
+    .panel + .panel { margin-top: 16px; }
+    .form-group { display: block; margin: 0 0 17px; min-width: 0; }
+    fieldset { border: 0; padding: 0; }
+    legend, .form-group > label { font-size: 15px; font-weight: 600; padding: 0; }
+    .hint { color: var(--muted); font-size: 14px; margin: 3px 0 0; }
+    input, textarea, button { font: inherit; }
+    input[type=text], input[type=email], textarea { color: var(--ink); width: 100%; margin-top: 6px; padding: 9px 11px; border: 1px solid #aebfba; border-radius: 7px; background: #fff; }
+    textarea { resize: vertical; display: block; }
+    .choices, .actions { display: flex; align-items: center; flex-wrap: wrap; gap: 9px 12px; }
+    .choices { margin-top: 6px; }
+    .choices label { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 7px; padding: 9px 13px; cursor: pointer; }
+    .choices label:has(input:checked) { border-color: var(--teal); background: #edf6f3; }
+    input[type=radio], input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--teal); margin: 0; flex: none; }
+    .pledge { display: flex; align-items: flex-start; gap: 9px; margin: 20px 0; }
+    .pledge input { margin-top: 3px; }
+    .button { color: #fff; background: var(--teal); border: 1px solid var(--teal); padding: 9px 14px; border-radius: 7px; text-decoration: none; font: inherit; font-weight: 600; cursor: pointer; }
+    .button:hover { background: #064f4a; }
+    .secondary { color: var(--ink); background: #fff; border-color: var(--line); }
+    .secondary:hover { background: #f3f7f5; }
+    button:disabled { opacity: .55; cursor: default; }
+    :focus-visible { outline: 3px solid #07857c; outline-offset: 3px; }
+    .status { color: var(--muted); margin: 10px 0 0; }
+    .status:empty { display: none; }
+    #email-draft { margin-bottom: 13px; }
+    @media (max-width: 480px) { main { padding: 26px 13px 42px; } .top { padding-inline: 15px; } }
+  </style>
+  <script src="./apply.js" defer></script>
+</head>
+<body>
+  <header><div class="top"><a class="brand" href="/">EngiWorld</a><button type="button" id="switch-language" class="language" lang="en" hidden>English</button></div></header>
+  <main>
+    <h1 data-text="title">云镜像共享申请</h1>
+    <p class="intro" data-text="intro">申请火山引擎或阿里云上的 EngiWorld 环境镜像。镜像仅用于学术研究，由项目组审核。</p>
+    <noscript>
+      <p class="panel">可把云平台、接收镜像的主账号 ID、需要的环境、具体学术用途、联系邮箱及仅限学术研究的确认，发送给项目组。 <a href="mailto:gaohongcheng2000@gmail.com?subject=EngiWorld%20Cloud%20Image%20Request">邮件申请</a> · <a href="https://engiworld-cloud-images.sweet-melon-0140.chatgpt.site/?lang=zh">在线申请</a></p>
+    </noscript>
+    <form class="panel" id="application" method="post" action="https://engiworld-cloud-images.sweet-melon-0140.chatgpt.site/apply">
+      <fieldset class="form-group">
+        <legend data-text="provider">云平台</legend>
+        <div class="choices">
+          <label><input name="provider" type="radio" value="volcengine" required><span data-text="volcengine">火山引擎</span></label>
+          <label><input name="provider" type="radio" value="aliyun" required><span data-text="aliyun">阿里云</span></label>
+        </div>
+      </fieldset>
+      <div class="form-group">
+        <label for="account" data-text="account">接收镜像的主账号 ID</label>
+        <p class="hint" id="account-hint" data-text="accountHint">火山引擎填写主账号 ID，阿里云填写主账号 UID。只需数字，请勿填写密码或访问密钥。</p>
+        <input id="account" name="account" type="text" inputmode="numeric" pattern="[0-9]{1,32}" maxlength="32" autocomplete="off" aria-describedby="account-hint" required>
+      </div>
+      <div class="form-group">
+        <label for="environments" data-text="environments">所需镜像或软件</label>
+        <input id="environments" name="environments" type="text" maxlength="300" required>
+      </div>
+      <div class="form-group">
+        <label for="purpose" data-text="purpose">具体学术用途</label>
+        <p class="hint" id="purpose-hint" data-text="purposeHint">请说明研究问题、实验计划或要复现的工作。</p>
+        <textarea id="purpose" name="purpose" rows="4" maxlength="2000" aria-describedby="purpose-hint" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="email" data-text="email">联系邮箱</label>
+        <input id="email" name="email" type="email" autocomplete="email" maxlength="254" required>
+      </div>
+      <div class="form-group">
+        <label for="affiliation" data-text="affiliation">学校或研究机构（选填）</label>
+        <input id="affiliation" name="affiliation" type="text" autocomplete="organization" maxlength="200">
+      </div>
+      <label class="pledge"><input type="checkbox" name="academic" value="yes" required><span data-text="pledge">我确认镜像仅用于上述学术研究，不用于商业用途。</span></label>
+      <div class="actions">
+        <button class="button" type="submit" id="submit" disabled data-text="submit">在线提交</button>
+        <button class="button secondary" type="button" id="prepare-email" disabled data-text="emailButton">通过邮件申请</button>
+      </div>
+      <p class="status" id="submit-status" role="status" aria-live="polite"></p>
+    </form>
+    <section class="panel" id="mail" aria-labelledby="mail-title" hidden>
+      <h2 id="mail-title" data-text="mailTitle">发送申请邮件</h2>
+      <p data-text="mailIntro">请将下面的申请内容发往项目邮箱。</p>
+      <p><a id="recipient" href="mailto:gaohongcheng2000@gmail.com">gaohongcheng2000@gmail.com</a></p>
+      <label for="email-draft" data-text="mailDraft">申请内容</label>
+      <textarea id="email-draft" rows="8" readonly></textarea>
+      <div class="actions">
+        <a class="button" id="open-email" href="mailto:gaohongcheng2000@gmail.com" data-text="send">打开邮箱发送</a>
+        <button class="button secondary" type="button" id="copy-email" data-text="copy">复制申请内容</button>
+      </div>
+      <p role="status" class="status" id="copy-status"></p>
+    </section>
+  </main>
+</body>
+</html>
